@@ -45,17 +45,17 @@ Things you may want to cover:
 
 ## itemsテーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| name            | string     | null: false                    |
-| description     | text       | null: false                    |
-| price           | integer    | null: false                    |
-| category_id     | integer    | null: false                    |
-| rank_id         | integer    | null: false                    |
-| delivery_fee    | integer    | null: false                    |
-| delivery_source | integer    | null: false                    |
-| delivery_days   | integer    | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| name             | string     | null: false                    |
+| description      | text       | null: false                    |
+| price            | integer    | null: false                    |
+| category_id      | integer    | null: false                    |
+| rank_id          | integer    | null: false                    |
+| delivery_fee_id  | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| delivery_days_id | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -80,7 +80,7 @@ _ belongs_to :item
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | postal_code     | string     | null: false                    |
-| prefecture      | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | house_number    | string     | null: false                    |
 | phone_number    | string     | null: false                    |
