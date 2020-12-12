@@ -36,7 +36,7 @@ Things you may want to cover:
 | first_name         | string  | null: false               |
 | last_furigana      | string  | null: false               |
 | first_furigana     | string  | null: false               |
-| birthday           | integer | null: false               |
+| birthday           | date    | null: false               |
 
 ### Association
 
