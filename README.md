@@ -83,7 +83,7 @@ _ belongs_to :item
 | prefecture      | integer    | null: false                    |
 | city            | string     | null: false                    |
 | house_number    | string     | null: false                    |
-| phone_number    | integer    | null: false                    |
+| phone_number    | string     | null: false                    |
 | purchase_record | references | null: false, foreign_key: true |
 
 ### Association
