@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :user do
-    binding.pry
     nickname {'sato'}
     email {Faker::Internet.free_email}
-    password = Faker::Internet.password(min_length: 6, mix_case: true)
+    password = Faker::Alphanumeric.alphanumeric(number: 6, min_alpha: 1, min_numeric: 1)
     password {password}
     password_confirmation {password}
     last_name {'佐藤'}
