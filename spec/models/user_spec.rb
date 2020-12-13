@@ -35,8 +35,21 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
-    it 'passwordが英数混合でないと登録できない' do
+    it 'passwordが全角英数字の場合登録できない' do
+      @user.password = "１２３ａｂｃ"
+      @user.password_confirmation = "１２３ａｂｃ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
+    end
+    it 'passwordが半角数字のみの場合登録できない' do
       @user.password = "123456"
+      @user.password_confirmation = "123456"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
+    end
+    it 'passwordが半角英字のみの場合登録できない' do
+      @user.password = "abcdef"
+      @user.password_confirmation = "abcdef"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
     end
@@ -96,6 +109,11 @@ RSpec.describe User, type: :model do
       @user.first_furigana = "ﾀﾛｳ"
       @user.valid?
       expect(@user.errors.full_messages).to include("First furigana is invalid. Input full-width characters.")
+    end
+    it 'birthdayが空の場合登録できない' do
+      @user.birthday = nil
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
 end
