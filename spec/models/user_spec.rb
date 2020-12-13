@@ -53,11 +53,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
     end
-    it 'passwordが6文字以上だと登録できる' do
-      @user.password = "abc123"
-      @user.password_confirmation = "abc123"
-      expect(@user).to be_valid
-    end
     it 'passwordが5文字以下だと登録できない' do
       @user.password = "abc12"
       @user.password_confirmation = "abc12"
