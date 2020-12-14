@@ -6,7 +6,7 @@ RSpec.describe Item, type: :model do
       @item = FactoryBot.build(:item)
     end
     
-    cnotext '商品が出品できる場合' do
+    context '商品が出品できる場合' do
       it '全ての値が正しく入力されていれば保存できる' do
         expect(@item).to be_valid
       end
@@ -32,8 +32,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
       end
-      it 'priceの範囲が300~9,999,999に該当しないと出品できない' do
+      it 'priceの範囲が299以下の場合出品できない' do
         @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+      it 'priceの範囲が10000000以上の場合出品できない' do
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
