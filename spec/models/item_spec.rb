@@ -6,63 +6,67 @@ RSpec.describe Item, type: :model do
       @item = FactoryBot.build(:item)
     end
     
-    it '全ての値が正しく入力されていれば保存できる' do
-      expect(@item).to be_valid
+    cnotext '商品が出品できる場合' do
+      it '全ての値が正しく入力されていれば保存できる' do
+        expect(@item).to be_valid
+      end
     end
-    it 'nameが空だと出品できない' do
-      @item.name = nil
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Name can't be blank")
-    end
-    it 'descriptionが空だと出品できない' do
-      @item.description = nil
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Description can't be blank")
-    end
-    it 'priceが空だと出品できない' do
-      @item.price = nil
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Price can't be blank")
-    end
-    it 'priceが半角数字でないと出品できない' do
-      @item.price = "１０００"
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
-    end
-    it 'priceの範囲が300~9,999,999に該当しないと出品できない' do
-      @item.price = 299
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Price is out of setting range")
-    end
-    it 'categoryが空(id=1)だと出品できない' do
-      @item.category_id = 1
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Category can't be blank")
-    end
-    it 'rankが空(id=1)だと出品できない' do
-      @item.rank_id = 1
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Rank can't be blank")
-    end
-    it 'delivery_feeが空(id=1)だと出品できない' do
-      @item.delivery_fee_id = 1
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
-    end
-    it 'prefectureが空(id=1)だと出品できない' do
-      @item.prefecture_id = 1
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Prefecture can't be blank")
-    end
-    it 'delivery_daysが空(id=1)だと出品できない' do
-      @item.delivery_days_id = 1
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Delivery days can't be blank")
-    end
-    it 'userが紐づいていないと出品できない' do
-      @item.user = nil
-      @item.valid?
-      expect(@item.errors.full_messages).to include("User must exist")
+    context '商品が出品できない場合' do
+      it 'nameが空だと出品できない' do
+        @item.name = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Name can't be blank")
+      end
+      it 'descriptionが空だと出品できない' do
+        @item.description = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Description can't be blank")
+      end
+      it 'priceが空だと出品できない' do
+        @item.price = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it 'priceが半角数字でないと出品できない' do
+        @item.price = "１０００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
+      end
+      it 'priceの範囲が300~9,999,999に該当しないと出品できない' do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+      it 'categoryが空(id=1)だと出品できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it 'rankが空(id=1)だと出品できない' do
+        @item.rank_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Rank can't be blank")
+      end
+      it 'delivery_feeが空(id=1)だと出品できない' do
+        @item.delivery_fee_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
+      end
+      it 'prefectureが空(id=1)だと出品できない' do
+        @item.prefecture_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'delivery_daysが空(id=1)だと出品できない' do
+        @item.delivery_days_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery days can't be blank")
+      end
+      it 'userが紐づいていないと出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
     end
   end
 end
