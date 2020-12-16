@@ -14,7 +14,6 @@ class PurchaseRecordsController < ApplicationController
       @purchase_record_buyer_address.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render action: :index
     end
   end
