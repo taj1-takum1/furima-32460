@@ -57,11 +57,6 @@ RSpec.describe PurchaseRecordBuyerAddress, type: :model do
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include("Phone number is invalid. Don't include hyphen(-)")
       end
-      it 'phone_numberが(0n0)の形式に該当しないと購入できない' do
-        @purchase.phone_number = "11122223333"
-        @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Phone number is invalid. Don't include hyphen(-)")
-      end
     end
   end
 end
