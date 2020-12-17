@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PurchaseRecordBuyerAddress, type: :model do
   describe "商品購入" do
     before do
-      @purchase = FactoryBot.build(:purchase_record_buyer_address)
+      @purchase = FactoryBot.build(:purchase_record_buyer_address, user_id: 1, item_id: 1)
     end
 
     context '商品が購入できる場合' do
@@ -56,6 +56,26 @@ RSpec.describe PurchaseRecordBuyerAddress, type: :model do
         @purchase.phone_number = "090-5433-4325"
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include("Phone number is invalid. Don't include hyphen(-)")
+      end
+      it 'phone_numberが12桁以上では購入できない' do
+        @purchase.phone_number = "080123456789"
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Phone number is invalid. Don't include hyphen(-)")
+      end
+      it 'phone_numberが英数混合では購入できない' do
+        @purchase.phone_number = "090abcdefgh"
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Phone number is invalid. Don't include hyphen(-)")
+      end
+      it 'user_idがないと購入できない' do
+        @purchase.user_id = nil
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idがないと購入できない' do
+        @purchase.item_id = nil
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
