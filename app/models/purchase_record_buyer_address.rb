@@ -9,8 +9,10 @@ class PurchaseRecordBuyerAddress
     validates :house_number
     validates :phone_number, format: {with: /\A\d{10,11}\z/, message: "is invalid. Don't include hyphen(-)"}
     validates :token
+    validates :user_id
+    validates :item_id
   end
-
+  
   def save
     purchase_record = PurchaseRecord.create(user_id: user_id, item_id: item_id)
     BuyerAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number, purchase_record_id: purchase_record.id)
