@@ -42,6 +42,7 @@ Things you may want to cover:
 
 - has_many :items
 - has_many :purchase_records
+- has_many :cards
 
 ## itemsテーブル
 
@@ -75,7 +76,7 @@ Things you may want to cover:
 _ belongs_to :item
 - has_one :buyer_address
 
-### buyer_addressesテーブル
+## buyer_addressesテーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
@@ -90,3 +91,15 @@ _ belongs_to :item
 ### Association
 
 - belongs_to :purchase_record
+
+## cardsテーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| card_token     | string     | null: false                    |
+| customer_token | string     | null: false                    |
+| user           | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
